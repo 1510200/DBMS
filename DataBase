@@ -1,0 +1,37 @@
+**** DBMS ****
+A DBMS (Database Management System) is software that helps you store, manage, retrieve, and manipulate data efficiently in a structured format.
+It's the backbone of modern applications—from banking systems to social media platforms—where data needs to be organized and accessed reliably.
+
+-> Database: Here we store data in the form of tables permanently
+-> Popular Databases: MySQl, Postgres, Oracle, SQlServer, MongoDB, Derby, h2Database
+-> Install MySql Database
+Download from here: https://dev.mysql.com/downloads/windows/installer/8.0.html
+-> When you download MySql Workbench you will get the following
+a. IDE - To Write SQl Query (Structured Query Language)
+(SQl query is use to interact with the database)
+b. MySQl Server
+
+Installation Doc: https://www.prowesstics.com/blogs/mysql-workbench-installation/
+
+-> Launch Mysqlworkbench
+-> Create psaDB connection
+-> Create Database: Create Database psaDB
+-> Connect to Database: use psaDB
+-> Create Table Student: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
