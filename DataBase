@@ -17,11 +17,218 @@ Installation Doc: https://www.prowesstics.com/blogs/mysql-workbench-installation
 -> Create psaDB connection
 -> Create Database: Create Database psaDB
 -> Connect to Database: use psaDB
--> Create Table Student: 
+-> Create Table Students: 
+
+USE atuldb;
+
+create table students(
+   sl INT PRIMARY KEY,
+  name VARCHAR(45),
+  email VARCHAR(45),
+  salary int
+  );
+  insert into students values(1,'Ram','ram@gmail.com',10000);
+  insert into students values(2,'Shyam','shyam@gmail.com',15000);
+  insert into students values(3,'Mohan','mohan@gmail.com',20000);
+  insert into students values(4,'Atul','atul@gmail.com',10000);
+  insert into students values(5,'Alok','alok@gmail.com',2000);
+  insert into students values(6,'Shibu','shibu@gmail.com',200);
+  insert into students values(7,'Chhotu','chhotu@gmail.com',5000);
+  select * from students;
 
 
+connect dbms to comand prompt
+Step 1 -> change the path to bin folder in MySql as shown below
+C:\Users\Atulg>  cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+Step 2 -> to enter the user name MySql -u root -p password shown below
+C:\Program Files\MySQL\MySQL Server 8.0\bin>MySql -u root -p
+Enter password: ********
+Step 3 -> to see the available database use show database;
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| atuldb             |
+| emsdb              |
+| information_schema |
+| julydb             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+Step 4 -> to connect to the required database use comand ( use database name)
+ use atuldb
+Database changed
+Step 5 -> in the database to see the list of tables write the comands (show tables)
+mysql> show tables;
++------------------+
+| Tables_in_atuldb |
++------------------+
+| students         |
++------------------+
+
+Step 6 -> to read content from table
+mysql> select * from students;
++----+--------+------------------+--------+
+| sl | name   | email            | salary |
++----+--------+------------------+--------+
+|  1 | Ram    | ram@gmail.com    |  10000 |
+|  2 | Shyam  | shyam@gmail.com  |  15000 |
+|  3 | Mohan  | mohan@gmail.com  |  20000 |
+|  4 | Atul   | atul@gmail.com   |  10000 |
+|  5 | Alok   | alok@gmail.com   |   2000 |
+|  6 | Shibu  | shibu@gmail.com  |    200 |
+|  7 | Chhotu | chhotu@gmail.com |   5000 |
++----+--------+------------------+--------+
+select -- use to read the database table
+* --- indicates all the the column
+from -- keyword
+students -- name of table
+** to read only sl and name ** ( select colunmName from tableName )
+mysql> select sl,name from students;
++----+-------+
+| sl | name  |
++----+-------+
+|  1 | Ram   |
+|  2 | Shyam |
+|  3 | Mohan |
++----+-------+
+###--- the student name whose sl no 2;  ----####
+select name from students where sl=3;
+
+###---give me the name of students whose salary is greater than or equal to 10000
+select name from students where salary>=10000;    
+
+###---- give me the students name whose salary (5000,200,20000);
+in operator perform where equal and more than one data in table;
+select name,salary from students where salary in(5000,200,20000);
+ select name,salary from students where salary in(5000,200,20000);
++--------+--------+
+| name   | salary |
++--------+--------+
+| Mohan  |  20000 |
+| Shibu  |    200 |
+| Chhotu |   5000 |
++--------+--------+
+
+#####----- give me the salary , name , email whose name(Atul, Alok, Chhotu)
+ select salary,name, email from students where name in('Atul','Alok','Chhotu');
++--------+--------+------------------+
+| salary | name   | email            |
++--------+--------+------------------+
+|  10000 | Atul   | atul@gmail.com   |
+|   2000 | Alok   | alok@gmail.com   |
+|   5000 | Chhotu | chhotu@gmail.com |
++--------+--------+------------------+
+(####--- give me the name of students whose salary is shorted in decending order)----not mention
+(golden rules of sql order can not be aulter)
+select ---> from ---> where ---> group by ---> having a ---> order by --->
 
 
+###--- to find using having salary >5000;
+mysql> SELECT name, SUM(salary) FROM students GROUP BY name HAVING SUM(salary) > 5000;
++-------+-------------+
+| name  | SUM(salary) |
++-------+-------------+
+| Ram   |       10000 |
+| Shyam |       15000 |
+| Mohan |       20000 |
+| Atul  |       10000 |
++-------+-------------+
+#### --- short students name decending order by salary
+in sql to short the data we use order by comand
+mysql> select name, salary from students order by salary desc;
++--------+--------+
+| name   | salary |
++--------+--------+
+| Mohan  |  20000 |
+| Shyam  |  15000 |
+| Ram    |  10000 |
+| Atul   |  10000 |
+| Chhotu |   5000 |
+| Alok   |   2000 |
+| Shibu  |    200 |
++--------+--------+
+####----short the students name ascending order by salary;
+mysql> select name, salary from students order by salary asc;
++--------+--------+
+| name   | salary |
++--------+--------+
+| Shibu  |    200 |
+| Alok   |   2000 |
+| Chhotu |   5000 |
+| Ram    |  10000 |
+| Atul   |  10000 |
+| Shyam  |  15000 |
+| Mohan  |  20000 |
++--------+--------+
+
+Built in functions in sql
+##############################
+give me the maximum salary from the table
+mysql> SELECT MAX(salary) AS highest_salary FROM students;
++----------------+
+| highest_salary |
++----------------+
+|          20000 |
++----------------+
+give me the minimum salary from the table
+mysql> SELECT MIN(salary) AS shortest_salary FROM students;
++-----------------+
+| shortest_salary |
++-----------------+
+|             200 |
++-----------------+
+give me the avarage of all the salary
+mysql> select avg(salary) from students;
++-------------+
+| avg(salary) |
++-------------+
+|   8885.7143 |
++-------------+
+give me the sum of all salaries
+mysql> select sum(salary) from students;
++-------------+
+| sum(salary) |
++-------------+
+|       62200 |
++-------------+
+count the number of students in table
+count(unique name);
+mysql> select count(sl) from students;
++-----------+
+| count(sl) |
++-----------+
+|         7 |
++-----------+
+count number of student city wise
+select count(sl) from students group by (salary);
+count salary group by;
+mysql> select salary,count(sl) from students group by (salary);
++--------+-----------+
+| salary | count(sl) |
++--------+-----------+
+|  10000 |         2 |
+|  15000 |         1 |
+|  20000 |         1 |
+|   2000 |         1 |
+|    200 |         1 |
+|   5000 |         1 |
++--------+-----------+
+group the student based on city and then count city wise and print the count in ascending order;
+select count(sl) from students group by(city) orderd by count(sl) asc;
+mysql>  select salary,count(sl) from students group by (salary) order by salary asc;
++--------+-----------+
+| salary | count(sl) |
++--------+-----------+
+|    200 |         1 |
+|   2000 |         1 |
+|   5000 |         1 |
+|  10000 |         2 |
+|  15000 |         1 |
+|  20000 |         1 |
++--------+-----------+
 
 
 
