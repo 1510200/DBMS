@@ -18,6 +18,8 @@ Installation Doc: https://www.prowesstics.com/blogs/mysql-workbench-installation
 -> Create Database: Create Database psaDB
 -> Connect to Database: use psaDB
 -> Create Table Students: 
+---- to create dtabase we can write (create database collage;)
+----- to delete database we can write(drop database collage;)
 
 USE atuldb;
 
@@ -229,6 +231,64 @@ mysql>  select salary,count(sl) from students group by (salary) order by salary 
 |  15000 |         1 |
 |  20000 |         1 |
 +--------+-----------+
+####---- top two record from top 
+select * from students order by salary desc limit 2;
+ select * from students order by salary desc limit 2;
++----+-------+-----------------+--------+
+| sl | name  | email           | salary |
++----+-------+-----------------+--------+
+|  3 | Mohan | mohan@gmail.com |  20000 |
+|  2 | Shyam | shyam@gmail.com |  15000 |
++----+-------+-----------------+--------+
+###---- give me only the first record from the top
+select * from students limit 1;
+###----give me the last two records from the table < min to max ascending order >
+ select * from students order by salary asc limit 2;
++----+-------+-----------------+--------+
+| sl | name  | email           | salary |
++----+-------+-----------------+--------+
+|  6 | Shibu | shibu@gmail.com |    200 |
+|  5 | Alok  | alok@gmail.com  |   2000 |
++----+-------+-----------------+--------+
+###--- to show only three laters of any colunm
+mysql> select mid(email,1,3) from students;
++----------------+
+| mid(email,1,3) |
++----------------+
+| ram            |
+| shy            |
+| moh            |
+| atu            |
+| alo            |
+| shi            |
+| chh            |
++----------------+
+###--- print the current system time using sql
+select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-10-08 16:33:50 |
++---------------------+
+mysql> select now() as Time;
++---------------------+
+| Time                |
++---------------------+
+| 2025-10-08 16:36:20 |
++---------------------+
+####---change the name from the table to ename;
+mysql> select name As Ename from students;
++--------+
+| Ename  |
++--------+
+| Ram    |
+| Shyam  |
+| Mohan  |
+| Atul   |
+| Alok   |
+| Shibu  |
+| Chhotu |
++--------+
 
 
 
