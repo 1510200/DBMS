@@ -290,6 +290,14 @@ mysql> select name As Ename from students;
 | Chhotu |
 +--------+
 
+CREATE DATABASE IF EXIST STUDENT -> IT means that if database is exist then it send us warming .
+    -> it is also use to chech weather the databse is exist or not 
+DROP DATABASE IF EXIST Data_base_name -> It is use to drope the table if exist if not exist then it throwns warming.
+
+Show Databases -> it is use to show all the database which are present in server
+Show tables -> it is use for show all the table which are present in that database
+
+
 
 
 
